@@ -1,42 +1,43 @@
 <?php
-include "Questions.php";
+    include 'Questions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="student.css">
-    <title>Student</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Student Information</title>
 </head>
 <body>
-    <form method="POST" action="lecture.php">
-        <table>
-        <tr>
-            <td><label><b>Question</b></label></td>
-            <td><label><b>Answer</b></label></td>
-            <td><label><b>Max Points</b></label></td>
-        </tr>
-        <?php
-        for($i = 0; $i < count($Questions); $i++) 
-        {
+    <form action="Lecture.php" method="POST">
+        <table class="questions-tb">
+            <tr>
+                <th><b>Questions</b></th>
+                <th><b>Answers</b></th>
+                <th><b>Max Point</b></th>
+            </tr>
+            <?php
+            for($i =0; $i < count($questions); $i++){
             ?>
-        <tr>
-            <td><?=($Questions[$i]["question"]) ?></td>
-            <td><input type="text" name="answer"></td>
-            <td><?=($Questions[$i]["max_point"]) ?></td>
-        </tr>
-        
-        <?php
-        }
-         ?>
-        <tr class="studentName">
-            <td><label>studentName</label></td>
-            <td><input type="text" name="StudentFname" placeholder="Fname"></td>
-            <td><input type="text" name="StudentLname" placeholder="Lname"></td>
-            <td><input type="submit" name="submit"></td>
+            <tr>
+                <td><?= ($questions[$i]['question'])?></td>
+                <td><input type="text" name="answers"></td>
+                <th><?= ($questions[$i]['max_point'])?></th>
+            </tr>
+            <?php
+            }
+            ?>
+            <tr class="form-section">
+              <td colspan="3">
+                <input type="text" name="Fname" placeholder="First Name">
+                <input type="text" name="Lname" placeholder="Last Name">
+                <br><br>
+                <input type="submit" value="Submit">
+              </td>
         </tr>
         </table>
+          
     </form>
 </body>
 </html>

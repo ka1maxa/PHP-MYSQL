@@ -12,11 +12,11 @@ include 'Task_4_Array.php';
     <table border="1">
         <?php for($i = 0; $i < count($cars); $i++): ?>
             <tr>
-            <td><?php echo $cars[$i]['make'] ?></td>
-            <td><?php echo $cars[$i]['model'] ?></td>
-            <td><?php echo $cars[$i]['color'] ?></td>
-            <td><?php echo $cars[$i]['Mileage'] ?></td>
-            <td><?php echo $cars[$i]['Status'] ?></td>
+                <td><?php echo $cars[$i]['make'] ?></td>
+                <td><?php echo $cars[$i]['model'] ?></td>
+                <td><?php echo $cars[$i]['color'] ?></td>
+                <td><?php echo $cars[$i]['Mileage'] ?></td>
+                <td><?php echo $cars[$i]['Status'] ?></td>
             </tr>
         <?php endfor; ?>
     </table>

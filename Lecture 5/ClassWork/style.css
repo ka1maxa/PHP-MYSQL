@@ -1,0 +1,15 @@
+form, .content
+{
+width: 500px;
+padding: 20px;
+margin: auto;
+border: solid 2px black;
+margin-top: 10%;
+background-color: rgb(214, 207, 207);
+}
+
+.content
+{
+    min-height: 200px;
+    background-color: aqua;
+}

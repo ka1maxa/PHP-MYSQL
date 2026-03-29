@@ -58,5 +58,11 @@ if(isset($_POST["submit"])) {
         $score++;
     }
 }
-echo "თქვენი ქულა: $score/5"; 
+
+if($sworia >= 3){
+echo "თქვენი ქულა: $sworia/5";
+} 
 ?>
+
+
+

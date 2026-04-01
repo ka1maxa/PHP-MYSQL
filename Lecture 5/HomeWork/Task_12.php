@@ -1,6 +1,3 @@
-<!-- დაწერეთ ფუნქცია, რომელიც ფორმიდან მიღებული ფაილის სახელისა და ტექსტის მიხედვით შექმნის ფაილს მითითებულ
-საქაღალდეში. შემდეგ იმავე პროგრამამ უნდა შეძლოს ამ ფაილის შიგთავსის რედაქტირება: თუ ფაილი უკვე არსებობს, ძველი
-ტექსტი არ წაიშალოს, არამედ ახალ ტექსტს დაემატოს ახალი სტრიქონიდან. ბოლოს გამოიტანეთ ფაილის სრული შიგთავსი. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +12,9 @@
 
         <label>sheiyvane files saxeli : </label>
         <input type="text" name="fileName"> <br><br><br>
+        
+        <label>sheiyvane text : </label>
+        <textarea name="text"></textarea>
 
         <input type="submit" name="submit">
     </form>
@@ -26,14 +26,17 @@ if(isset($_POST["submit"]))
         {
             $folderName = trim($_POST["folderName"]);
             $fileName = trim($_POST["fileName"]);
+            $text = $_POST["text"] ?? "";
 
             if($folderName == "")
                 {
                     echo "sheiyvane folderis saxeli" . "\n";
+                    return;
                 }
             if($fileName == "")
                 {
                     echo "sheiyvane failis saxeli" . "\n";
+                    return;
                 }
             if(!file_exists($folderName))
                 {
@@ -42,35 +45,25 @@ if(isset($_POST["submit"]))
                             echo "folderi sheiqmna";
                         }
                 }
-            else
-                {
-                    if(!file_exists($fileName))
+                 $fileFullPath = $folderName . "/" . $fileName;
+                    if(!file_exists($fileFullPath))
                         {
-                            $file = fopen($fileName, "w");
-                            fwrite($file, "Faili sheiqmna");
+                            $file = fopen($fileFullPath, "w");
+                            fwrite($file, $text . "\n");
                             fclose($file);
-
-                            $file = scandir($folderName);
-                            foreach($file as $f)
-                                {
-                                    echo $f .  "\n";
-                                }
                         }
                     else
                         {
                             
-                            $file = fopen($fileName, "a");
-                            fwrite($file, "Faili sheiqmna" . "\n");
+                            $file = fopen($fileFullPath, "a");
+                            fwrite($file, $text . "\n");
                             fclose($file);
-
-                            $file = fopen($fileName, "r");
-                            $res = fread($file, filesize($fileName));
-                            fclose($file);
-
-                            echo $res;
-
                         }
-                }
+                     $file = fopen($fileFullPath, "r");
+                     $res = fread($file, filesize($fileFullPath));
+                     fclose($file);
+                     
+                     echo $res;
         }
         CheckFolderAndFile();
     }

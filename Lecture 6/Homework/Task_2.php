@@ -14,9 +14,17 @@
         <input type="submit" name="submit" value="upload">
 
         <br><br>
+        <select name="FileNameForChanges">
+        <?php
+        $files = scandir("Storage/");
+        foreach($files as $f)
+        {
+            if($f == "." || $f == "..") continue;
+            echo "<option value='$f'>$f</option>";
+        }
+        ?>
+        </select>
 
-        <label>sheiyvane file saxeli romlis washlac ginda : </label>
-        <input type="text" name="fileForDelete">
 
         <input type="submit" name="submitDelete" value="DELETE">
     </form>
@@ -28,7 +36,7 @@
 <?php
 if(isset($_POST["submit"]))
     {
-        $DIrection = "Storage/";
+        $Direction = "Storage/";
         $fileSize = $_FILES["userFile"]["size"];
         $tmp_name = $_FILES["userFile"]["tmp_name"];
         $size = 1024 * 1024 * 50;
@@ -58,31 +66,19 @@ if(isset($_POST["submit"]))
 
 if(isset($_POST["submitDelete"]))
     {
-        function DeleteFileFromFolder()
+        function DeleteFileFromFolder($userFile)
         {
-            $Direction = "Storage/";
-            $fileForDelete = $Direction . trim($_POST["fileForDelete"]);
-
-            if(file_exists($fileForDelete))
+            $file = "Storage/" . $userFile;
+            if(file_exists($file))
                 {
-                    if(is_file($fileForDelete))
+                    if(is_file($file))
                         {
-                            if(unlink($fileForDelete))
-                                {
-                                    echo "file warmatebit waishala : " . $fileForDelete . "\n";
-                                }
-                            else
-                                {
-                                    echo "ver waishala";
-                                }
+                            unlink($file);
+                            echo "faili waishala : " . $userFile;
                         }
                 }
-            else
-                {
-                    echo "faili ar arsebobs" . "<br>" ;
-                }
         }
-        DeleteFileFromFolder();
+        DeleteFileFromFolder($_POST["FileNameForChanges"]);
     }
 ?>
 </html>

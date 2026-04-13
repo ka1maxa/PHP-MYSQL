@@ -1,0 +1,97 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+/* FORM */
+form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 2;
+}
+
+/* LABEL */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* FILE INPUT */
+input[type="file"] {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* BUTTONS */
+input[type="submit"] {
+    background: #4facfe;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background: #007bff;
+}
+
+/* DELETE BUTTON */
+input[name="buttonForDelete"] {
+    background: #ff4d4d;
+}
+
+input[name="buttonForDelete"]:hover {
+    background: #cc0000;
+}
+
+/* SELECT */
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+/* MESSAGES */
+body p,
+body div {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* SUCCESS / ERROR */
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}

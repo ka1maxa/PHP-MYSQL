@@ -8,27 +8,37 @@
 </head>
 <?php
 if(isset($_POST["submit"]))
-    {
-        $Direction = "Storage/";
-        $tmp_name = $_FILES["userFile"]["tmp_name"];
-        $userFileSize = $_FILES["userFile"]["size"];
-        $postSize = 1024 * 1024 * 100;
-        $ext = pathinfo($_FILES["userFile"]["name"], PATHINFO_EXTENSION);
-        $time = date("d-m-Y". "-" .time());
-        if($ext == "jpg" || $ext == "png" || $ext == "gif")
-            {
-                if($userFileSize > $postSize)
-                    {
-                        echo "failis zoma agemateba 100-mbs";
-                    }
-                else
-                    {
-                        move_uploaded_file($tmp_name, $Direction . $time ." " .$_FILES["userFile"]["name"]);
-                        echo "faili daemata";
-                    }
-            }
+{
+    $Direction = "Storage/";
+    $tmp_name = $_FILES["userFile"]["tmp_name"];
+    $userFileSize = $_FILES["userFile"]["size"];
+    $postSize = 1024 * 1024 * 100;
 
+    $originalName = $_FILES["userFile"]["name"];
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+
+    $handle = fopen("id.txt", "r");
+    $id = fread($handle, filesize("id.txt"));
+    fclose($handle);
+
+    $newFileName = $id . "_" . date("d-m-Y") . "_" . $originalName;
+
+    $handle = fopen("id.txt", "w");
+    fwrite($handle, $id + 1);
+    fclose($handle);
+
+    if($ext == "jpg" || $ext == "png" || $ext == "gif")
+    {
+        if($userFileSize > $postSize)
+        {
+            echo "failis zoma agemateba 100-mbs";
+        }
+        else
+        {
+            move_uploaded_file($tmp_name, $Direction . $newFileName);
+        }
     }
+}
 ?>
 <body>
     <form method="POST" enctype="multipart/form-data">

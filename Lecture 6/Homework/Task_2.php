@@ -57,7 +57,7 @@ if(isset($_POST["submit"]))
                 if($f == "." || $f == "..") continue;
                
                 echo "<li>";
-                echo $f . "    ";
+                echo $f . "    ";   
                 echo "<a href='Storage/$f' download>Download</a>"; 
                 echo "</li>";
                  

@@ -11,7 +11,25 @@
         <label>shemoitane sheni file : </label>
         <input type="file" name="file" accept=".png, .jpg, .gif">
 
-        <input type="submit" name="submit"> 
+
+        <input type="submit" name="submit"><br><br>
+
+
+        <h3 style="color:whitesmoke;">Files</h3>
+    <?php
+    $file = scandir("Storage/");
+    echo "<ul>";
+    foreach($file as $f)
+        {
+            if($f == "." || $f == "..")continue;
+                {
+                    echo "<li>";
+                    echo $f . "<br>";
+                    echo "</li>";
+                }
+        }
+    echo "</ul>";
+    ?> 
     </form>
 </body>
 <?php
@@ -35,7 +53,7 @@ if(isset($_POST["submit"]))
             }
         else
             {
-                echo "faili formats ar sheesabameba";
+                echo "faili formats ar sheesabameba an veli carielia";
             }
     }
 ?>

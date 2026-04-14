@@ -17,20 +17,20 @@
 if(isset($_POST["submit"]))
     {
 function test()
-{
-$fileName = "Files/user.txt";
-$UserPrint = $_POST["UserPrint"];
+    {
+        $fileName = "Files/user.txt";
+        $UserPrint = $_POST["UserPrint"];
 
-$file = fopen("Files/user.txt", "w");
-fwrite($file, $UserPrint);
-fclose($file);
+        $file = fopen("Files/user.txt", "w");
+        fwrite($file, $UserPrint);
+        fclose($file);
 
-$file = fopen($fileName, "r");
-$res = fread($file, filesize("Files/user.txt"));
-fclose($file);
-echo $res;
-}
-    }
+        $file = fopen($fileName, "r");
+        $res = fread($file, filesize("Files/user.txt"));
+        fclose($file);
+        echo $res;
+        }
 test();
+    }
 ?>
 </html>

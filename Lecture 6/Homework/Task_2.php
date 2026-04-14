@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/Task_2s.css">
+    <link rel="stylesheet" href="./CSS/Task_2.css">
     <title>CRUD methods for files (without update)</title>
 </head>
 <body>
@@ -76,6 +76,14 @@ if(isset($_POST["submitDelete"]))
                             unlink($file);
                             echo "faili waishala : " . $userFile;
                         }
+                    else
+                        {
+                            echo "ar aris failis formati";
+                        }
+                }
+            else
+                {
+                    echo "faili ar arsebobs";
                 }
         }
         DeleteFileFromFolder($_POST["FileNameForChanges"]);

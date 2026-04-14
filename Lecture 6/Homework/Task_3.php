@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./CSS/Task_3.css">
-    <title>Create file</title>
+    <title>Create and write text in file</title>
 </head>
 <?php
 if(isset($_POST["submit"]))
@@ -31,37 +31,37 @@ if(isset($_POST["submit"]))
 
 if(isset($_POST["submitForChanges"]))
     {
-    function ChangeTxt($userFile)
-    {
-        $Direction = "Storage/";
-        $fullDirection = $Direction . $userFile;
-        $userTextForFile = $_POST["textForFile"];
+        function ChangeTxt($userFile)
+        {
+            $Direction = "Storage/";
+            $fullDirection = $Direction . $userFile;
+            $userTextForFile = $_POST["textForFile"];
 
-        if(file_exists($fullDirection))
-            {
-                if(is_file($fullDirection))
-                    {
-                        $files = fopen($fullDirection, "a");
-                        fwrite($files, $userTextForFile . "\n");
-                        fclose($files);
-                        echo "warmatebit daemata teqsti";
-
-
-                        $lines = file($fullDirection);
-                        echo "<ul>";
-                        foreach($lines as $line)
+            if(file_exists($fullDirection))
+                {
+                    if(is_file($fullDirection))
                         {
-                            echo "<li>" . $line . "</li>";
+                            $files = fopen($fullDirection, "a");
+                            fwrite($files, $userTextForFile . "\n");
+                            fclose($files);
+                            echo "warmatebit daemata teqsti";
+
+
+                            $lines = file($fullDirection);
+                            echo "<ul>";
+                            foreach($lines as $line)
+                            {
+                                echo "<li>" . $line . "</li>";
+                            }
+                            echo "</ul>";
                         }
-                        echo "</ul>";
-                    }
-            }
-        else
-            {
-                echo "faili ar arsebobs";
-            }
-    }
-    ChangeTxt($_POST["FileNameForChanges"]);
+                }
+            else
+                {
+                    echo "faili ar arsebobs";
+                }
+        }
+        ChangeTxt($_POST["FileNameForChanges"]);
     }
 ?>
 <body>

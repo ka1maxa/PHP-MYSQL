@@ -39,7 +39,7 @@ if(isset($_POST['submit']))
         move_uploaded_file($file_tmp, $file_path);
 
          $insert = "INSERT INTO posts (category_id, user_id, title, text, img_url) 
-                  VALUES ($category_id, $user_id, '$title', '$text', '$file_path')";
+                    VALUES ($category_id, $user_id, '$title', '$text', '$file_path')";
         
         mysqli_query($connect,$insert);
          

@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
     include 'Questions.php';
 ?>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
                 <th><b>Max Point</b></th>
             </tr>
             <?php
-            for($i =0; $i < count($questions); $i++){
+            for($i =0; $i < count($Questions); $i++){
             ?>
             <tr>
                 <td><?= ($questions[$i]['question'])?></td>
@@ -40,4 +40,4 @@
           
     </form>
 </body>
-</html>
+</html> -->

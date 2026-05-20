@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="./cssForAll.css">
+
 <form method="POST" enctype="multipart/form-data">
+    
     <label>title : </label>
     <input type="text" name="title"><br><br>
 

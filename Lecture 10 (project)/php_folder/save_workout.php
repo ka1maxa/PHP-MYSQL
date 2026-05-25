@@ -18,6 +18,6 @@ foreach($weights as $i => $weight) {
     }
 }
 
-header("Location: ../workout.php?program_id=$program_id&success=შენახულია");
+header("Location: ../workout.php?program_id=$program_id&success=");
 exit();
 ?>

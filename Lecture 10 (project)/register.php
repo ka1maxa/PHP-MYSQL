@@ -33,25 +33,29 @@ if (isset($_POST['register'])) {
 </head>
 <body>
     <div class="login-container">
-        <h2>რეგისტრაცია</h2>
-        <?php if($error != ""): ?>
+        <h2>registracia</h2>
+        <?php if($error != "")
+            { 
+        ?>
             <p class="error"><?= $error ?></p>
-        <?php endif; ?>
+        <?php 
+            }
+        ?>
         <form method="POST">
             <div class="form-group">
-                <label>სახელი</label>
-                <input type="text" name="name" placeholder="შეიყვანე სახელი" required>
+                <label>saxeli</label>
+                <input type="text" name="name" required>
             </div>
             <div class="form-group">
-                <label>ემაილი</label>
-                <input type="email" name="email" placeholder="შეიყვანე ემაილი" required>
+                <label>mail</label>
+                <input type="email" name="email" required>
             </div>
             <div class="form-group">
-                <label>პაროლი</label>
-                <input type="password" name="password" placeholder="შეიყვანე პაროლი" required>
+                <label>password</label>
+                <input type="password" name="password" required>
             </div>
-            <button type="submit" name="register">რეგისტრაცია</button>
-            <p class="register-link">უკვე გაქვს აქაუნთი? <a href="./login.php">შესვლა</a></p>
+            <button type="submit" name="register">register</button>
+            <p class="register-link">ukve gaqvs account?<a href="./login.php">Enter</a></p>
         </form>
     </div>
 </body>

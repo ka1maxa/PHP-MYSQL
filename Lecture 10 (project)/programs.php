@@ -32,26 +32,28 @@ $programs = mysqli_fetch_all($programs_result, MYSQLI_ASSOC);
             </ul>
         </nav>
         <div class="actions">
-            <span class="username">გამარჯობა, <?= $_SESSION['user_name'] ?>!</span>
-            <a href="./php_folder/logout.php" class="auth-button">გასვლა</a>
+            <span class="username">hi, <?= $_SESSION['user_name'] ?>!</span>
+            <a href="./php_folder/logout.php" class="auth-button">logout</a>
         </div>
     </header>
 
     <div class="programs-container">
-        <h2>პროგრამები</h2>
+        <h2>Programs</h2>
         <div class="programs-grid">
             <?php foreach($programs as $program): ?>
                 <div class="program-card">
                     <h3><?= $program['title'] ?></h3>
                     <p><?= $program['description'] ?></p>
-                    <p class="level"><?= strtoupper($program['level']) ?> | <?= $program['duration_weeks'] ?> კვირა</p>
-                    <a href="./workout.php?program_id=<?= $program['id'] ?>" class="details-btn">დეტალები</a>
+                    <p class="level"><?= strtoupper($program['level']) ?> | <?= $program['duration_weeks'] ?> weeks</p>
+                    <a href="./workout.php?program_id=<?= $program['id'] ?>" class="details-btn">Details</a>
                 </div>
             <?php endforeach; ?>
 
-            <?php if(empty($programs)): ?>
-                <p style="color: rgba(255,255,255,0.5);">პროგრამები არ არის დამატებული</p>
-            <?php endif; ?>
+            <?php if(empty($programs))
+                { ?>
+                <p style="color: rgba(255,255,255,0.5);">programa ar aris damatebuli</p>
+            <?php
+                }?>
         </div>
     </div>
 </body>

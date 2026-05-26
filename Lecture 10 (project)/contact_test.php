@@ -16,8 +16,7 @@
             <ul>
                 <li><a href="./home.php">HOME</a></li>
                 <li><a href="./programs.php">PROGRAMS</a></li>
-                <li><a href="./about_test.php">ABOUT US</a></li>
-                <li><a href="./contact_test.php" class="active">CONTACTS</a></li>
+                <li><a href="./about_test.php">ABOUT US</a></li>    
             </ul>
         </nav>
         <div class="actions">

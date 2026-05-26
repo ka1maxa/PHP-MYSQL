@@ -15,7 +15,6 @@
             <ul>
                 <li><a href="./home.php">HOME</a></li>
                 <li><a href="./programs.php">PROGRAMS</a></li>
-                <li><a href="./about_test.php" class="active">ABOUT US</a></li>
                 <li><a href="./contact_test.php">CONTACTS</a></li>
             </ul>
         </nav>

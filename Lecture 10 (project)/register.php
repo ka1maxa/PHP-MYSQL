@@ -3,20 +3,23 @@ session_start();
 require_once './php_folder/config.php';
 require_once './php_folder/functions.php';
 
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']))
+{
     header("Location: ./programs.php");
     exit();
 }
 
 $error = "";
 
-if (isset($_POST['register'])) {
+if (isset($_POST['register']))
+{
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     $error = register_user($connect, $name, $email, $password);
-    if (!$error) {
+    if (!$error)
+    {
         login_user($connect, $email, $password);
         header("Location: ./programs.php");
         exit();

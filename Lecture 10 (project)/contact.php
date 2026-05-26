@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']))
+{
     header("Location: ./login.php");
     exit();
 }
@@ -16,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <header>
         <div class="logo">
-            <img src="./images/Gemini_Generated_Image_2tc08t2tc08t2tc0.png" alt="logo">
+            <img src="./images/logo.png" alt="logo">
         </div>
         <nav>
             <ul>

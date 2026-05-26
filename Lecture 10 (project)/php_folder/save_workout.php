@@ -9,8 +9,10 @@ $weights = $_POST['weight'];
 $reps = $_POST['reps'];
 $date = date('Y-m-d');
 
-foreach($weights as $i => $weight) {
-    if($weight != '' && $reps[$i] != '') {
+foreach($weights as $i => $weight)
+{
+    if($weight != '' && $reps[$i] != '')
+    {
         $set_number = $i + 1;
         $query = "INSERT INTO workout_sets (user_id, exercise_id, program_id, set_number, weight, reps, date) 
                   VALUES ('$user_id', '$exercise_id', '$program_id', '$set_number', '$weight', '{$reps[$i]}', '$date')";

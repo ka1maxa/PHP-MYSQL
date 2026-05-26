@@ -9,8 +9,10 @@ $weights = $_POST['weight'];
 $reps = $_POST['reps'];
 $date = date('Y-m-d');
 
-foreach($weights as $i => $weight) {
-    if($weight != '' && $reps[$i] != '') {
+foreach($weights as $i => $weight)
+    {
+    if($weight != '' && $reps[$i] != '')
+        {
         $set_number = $i + 1;
         
         $check = mysqli_query($connect, "SELECT id FROM workout_sets 

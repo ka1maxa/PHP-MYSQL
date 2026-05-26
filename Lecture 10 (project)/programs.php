@@ -3,7 +3,8 @@ session_start();
 require_once './php_folder/config.php';
 require_once './php_folder/functions.php';
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']))
+{
     header("Location: ./login.php");
     exit();
 }
@@ -35,9 +36,14 @@ $progress = get_user_progress($connect, $_SESSION['user_id']);
             </ul>
         </nav>
         <div class="actions">
-            <?php if($_SESSION['role'] == 'admin'): ?>
+            <?php 
+            if($_SESSION['role'] == 'admin')
+            {
+            ?>
                 <a href="./admin/index.php" class="auth-button">ადმინ პანელი</a>
-            <?php endif; ?>
+            <?php 
+            }
+            ?>
             <span class="username">hi, <?= $_SESSION['user_name'] ?>!</span>
             <a href="./php_folder/logout.php" class="auth-button">logout</a>
         </div>
@@ -46,22 +52,33 @@ $progress = get_user_progress($connect, $_SESSION['user_id']);
     <div class="programs-container">
         <h2>Programs</h2>
         <div class="programs-grid">
-            <?php foreach($programs as $program): ?>
+            <?php 
+            foreach($programs as $program)
+                { 
+            ?>
                 <div class="program-card">
                     <h3><?= $program['title'] ?></h3>
                     <p><?= $program['description'] ?></p>
                     <p class="level"><?= strtoupper($program['level']) ?> | <?= $program['duration_weeks'] ?> weeks</p>
                     <a href="./workout.php?program_id=<?= $program['id'] ?>" class="details-btn">Details</a>
                 </div>
-            <?php endforeach; ?>
+            <?php 
+                } 
+            ?>
 
-            <?php if(empty($programs)): ?>
+            <?php if(empty($programs))
+                {
+             ?>
                 <p style="color: rgba(255,255,255,0.5);">programa ar aris damatebuli</p>
-            <?php endif; ?>
+            <?php
+                }
+            ?>
         </div>
 
-        <!-- პროგრესის სექცია -->
-        <?php if(!empty($progress)): ?>
+        <?php 
+        if(!empty($progress))
+            {
+        ?>
         <div class="progress-section">
             <h2>ჩემი პროგრესი</h2>
             <table class="progress-table">
@@ -75,7 +92,10 @@ $progress = get_user_progress($connect, $_SESSION['user_id']);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($progress as $row): ?>
+                    <?php 
+                    foreach($progress as $row)
+                        {
+                    ?>
                     <tr>
                         <td><?= $row['exercise_name'] ?></td>
                         <td><?= $row['date'] ?></td>
@@ -83,11 +103,15 @@ $progress = get_user_progress($connect, $_SESSION['user_id']);
                         <td><?= $row['total_sets'] ?></td>
                         <td><?= $row['total_volume'] ?> კგ</td>
                     </tr>
-                    <?php endforeach; ?>
+                    <?php
+                        }
+                    ?>
                 </tbody>
             </table>
         </div>
-        <?php endif; ?>
+        <?php
+            }
+        ?>
     </div>
 </body>
 </html>

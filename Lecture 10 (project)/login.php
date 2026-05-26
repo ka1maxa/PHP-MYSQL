@@ -3,10 +3,14 @@ session_start();
 require_once './php_folder/config.php';
 require_once './php_folder/functions.php';
 
-if (isset($_SESSION['user_id'])) {
-    if ($_SESSION['role'] == 'admin') {
+if (isset($_SESSION['user_id']))
+{
+    if ($_SESSION['role'] == 'admin')
+    {
         header("Location: ./admin/index.php");
-    } else {
+    }
+    else
+    {
         header("Location: ./programs.php");
     }
     exit();
@@ -14,16 +18,20 @@ if (isset($_SESSION['user_id'])) {
 
 $error = "";
 
-if (isset($_POST['login'])) {
+if (isset($_POST['login']))
+    {
     $email = $_POST['email'];
     $password = $_POST['password'];
     
     $error = login_user($connect, $email, $password);
-    if (!$error) {
+    if (!$error) 
+        {
         if ($_SESSION['role'] == 'admin')    
         {
             header("Location: ./admin/index.php");
-        } else {
+        }
+        else
+        {
             header("Location: ./programs.php");
         }
         exit();
@@ -41,9 +49,13 @@ if (isset($_POST['login'])) {
 <body>
     <div class="login-container">
         <h2>LOG IN</h2>
-        <?php if($error != ""): ?>
+        <?php if($error != "")
+            { 
+        ?>
             <p class="error"><?= $error ?></p>
-        <?php endif; ?>
+        <?php 
+            }
+        ?>
         <form method="POST">
             <div class="form-group">
                 <label>ემაილი</label>

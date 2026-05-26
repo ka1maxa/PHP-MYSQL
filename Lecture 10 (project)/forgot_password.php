@@ -6,14 +6,18 @@ require_once './php_folder/functions.php';
 $error = "";
 $success = "";
 
-if (isset($_POST['reset'])) {
+if (isset($_POST['reset']))
+{
     $email = trim($_POST['email']);
     $new_password = $_POST['new_password'];
 
     $check = mysqli_query($connect, "SELECT * FROM user_credentials WHERE email='$email'");
-    if (mysqli_num_rows($check) == 0) {
+    if (mysqli_num_rows($check) == 0)
+    {
         $error = "ეს ემაილი არ არსებობს";
-    } else {
+    }
+    else
+    {
         $hashed = password_hash($new_password, PASSWORD_DEFAULT);
         mysqli_query($connect, "UPDATE user_credentials SET password='$hashed' WHERE email='$email'");
         $success = "პაროლი წარმატებით შეიცვალა!";
@@ -38,9 +42,13 @@ if (isset($_POST['reset'])) {
         <?php
             }
          ?>
-        <?php if($success != ""): ?>
+        <?php if($success != "")
+            {
+         ?>
             <p class="success"><?= $success ?></p>
-        <?php endif; ?>
+        <?php
+            }
+         ?>
         <form method="POST">
             <div class="form-group">
                 <label>ემაილი</label>

@@ -46,4 +46,32 @@ function is_admin($connect, $id) {
     $user = get_user($connect, $id);
     return $user['role'] === 'admin';
 }
+function get_user_progress($connect, $user_id) {
+    $result = mysqli_query($connect, "
+        SELECT 
+            e.name as exercise_name,
+            ws.date,
+            SUM(ws.weight * ws.reps) as total_volume,
+            MAX(ws.weight) as max_weight,
+            COUNT(ws.id) as total_sets
+        FROM workout_sets ws
+        JOIN exercises e ON e.id = ws.exercise_id
+        WHERE ws.user_id = '$user_id'
+        GROUP BY ws.exercise_id, ws.date
+        ORDER BY ws.date DESC
+    ");
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function get_program_stats($connect, $program_id) {
+    $result = mysqli_query($connect, "
+        SELECT 
+            COUNT(DISTINCT ws.user_id) as total_users,
+            COUNT(ws.id) as total_sets,
+            MAX(ws.weight) as max_weight,
+            AVG(ws.weight) as avg_weight
+        FROM workout_sets ws
+        WHERE ws.program_id = '$program_id'
+    ");
+    return mysqli_fetch_assoc($result);
+}
 ?>

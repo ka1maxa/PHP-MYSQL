@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']))
+{
     header("Location: ./login.php");
     exit();
 }
@@ -19,11 +20,22 @@ $exercises_query = "SELECT pe.*, e.name, e.muscle_group, e.difficulty
                     WHERE pe.program_id = '$program_id'
                     ORDER BY pe.day_number, pe.id";
 $exercises_result = mysqli_query($connect, $exercises_query);
-$exercises = mysqli_fetch_all($exercises_result,MYSQLI_ASSOC);
+$exercises = mysqli_fetch_all($exercises_result, MYSQLI_ASSOC);
 $days = [];
-foreach($exercises as $exercise) 
+foreach($exercises as $exercise)
 {
     $days[$exercise['day_number']][] = $exercise;
+}
+
+$today = date('Y-m-d');
+$results_result = mysqli_query($connect, "SELECT * FROM workout_sets 
+                  WHERE user_id = '{$_SESSION['user_id']}' 
+                  AND program_id = '$program_id' 
+                  AND date = '$today'");
+$previous_sets = [];
+foreach(mysqli_fetch_all($results_result, MYSQLI_ASSOC) as $set)
+{
+    $previous_sets[$set['exercise_id']][$set['set_number']] = $set;
 }
 ?>
 <!DOCTYPE html>
@@ -37,13 +49,13 @@ foreach($exercises as $exercise)
 <body>
     <header>
         <div class="logo">
-            <img src="./images/Gemini_Generated_Image_2tc08t2tc08t2tc0.png" alt="logo">
+            <img src="./images/logo.png" alt="logo">
         </div>
         <nav>
             <ul>
                 <li><a href="./programs.php">PROGRAMS</a></li>
-                <li><a href="#">ABOUT US</a></li>
-                <li><a href="#">CONTACTS</a></li>
+                <li><a href="./about.php">ABOUT US</a></li>
+                <li><a href="./contact.php">CONTACTS</a></li>
             </ul>
         </nav>
         <div class="actions">
@@ -60,13 +72,13 @@ foreach($exercises as $exercise)
 
         <?php foreach($days as $day_number => $day_exercises)
             {
-        ?>
+         ?>
             <div class="day-section">
                 <h3>დღე <?= $day_number ?></h3>
                 <div class="exercises-grid">
                     <?php foreach($day_exercises as $exercise)
-                        { 
-                    ?>
+                        {
+                     ?>
                         <div class="exercise-card">
                             <h4><?= $exercise['name'] ?></h4>
                             <p class="muscle"><?= $exercise['muscle_group'] ?></p>
@@ -77,26 +89,30 @@ foreach($exercises as $exercise)
                                 <input type="hidden" name="exercise_id" value="<?= $exercise['exercise_id'] ?>">
                                 <input type="hidden" name="program_id" value="<?= $program_id ?>">
                                 <?php for($i = 1; $i <= $exercise['sets']; $i++)
-                                    {
-                                ?>
+                                {
+                                 ?>
                                     <div class="set-row">
                                         <span>სეტი <?= $i ?></span>
-                                        <input type="number" name="weight[]" placeholder="კგ" step="0.5" min="0">
-                                        <input type="number" name="reps[]" placeholder="გამეორ." min="0">
+                                        <input type="number" name="weight[]" 
+                                            placeholder="კგ" step="0.5" min="0"
+                                            value="<?= isset($previous_sets[$exercise['exercise_id']][$i]) ? $previous_sets[$exercise['exercise_id']][$i]['weight'] : '' ?>">
+                                        <input type="number" name="reps[]" 
+                                            placeholder="გამეორ." min="0"
+                                            value="<?= isset($previous_sets[$exercise['exercise_id']][$i]) ? $previous_sets[$exercise['exercise_id']][$i]['reps'] : '' ?>">
                                     </div>
-                                <?php 
-                                    }
-                                 ?>
+                                <?php
+                                 }
+                                ?>
                                 <button type="submit">შენახვა</button>
                             </form>
                         </div>
                     <?php
-                        }
+                     }
                     ?>
                 </div>
             </div>
         <?php 
-            } 
+        }
         ?>
     </div>
 </body>

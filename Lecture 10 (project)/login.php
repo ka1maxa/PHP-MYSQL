@@ -54,7 +54,8 @@ if (isset($_POST['login'])) {
                 <input type="password" name="password" placeholder="შეიყვანე პაროლი" required>
             </div>
             <button type="submit" name="login">შესვლა</button>
-            <p class="register-link">არ გაქვს აქაუნთი? <a href="./register.php">რეგისტრაცია</a></p>
+            <p class="register-link">არ გაქვს აქაუნთი? <a href="./register.php">რეგისტრაცია</a></p><br>
+            <p class="register-link"><a href="./forgot_password.php">დაგავიწყდა პაროლი?</a></p>
         </form>
     </div>
 </body>

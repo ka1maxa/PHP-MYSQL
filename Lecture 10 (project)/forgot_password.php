@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once './php_folder/config.php';
+require_once './php_folder/functions.php';
 
 $error = "";
 $success = "";

@@ -3,20 +3,23 @@ session_start();
 require_once '../../php_folder/config.php';
 require_once '../../php_folder/functions.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin')
+{
     header("Location: /shota/PHP-MYSQL/Lecture 10 (project)/login.php");
     exit();
 }
 
 
-if (isset($_GET['delete'])) {
+if (isset($_GET['delete']))
+{
     $id = (int)$_GET['delete'];
     mysqli_query($connect, "UPDATE users SET deleted_at=NOW() WHERE id=$id");
     header("Location: index.php");
     exit();
 }
 
-if (isset($_POST['id'], $_POST['name'])) {
+if (isset($_POST['id'], $_POST['name']))
+{
     $id = (int)$_POST['id'];
     $name = trim($_POST['name']);
     $age = (int)$_POST['age'];
@@ -31,14 +34,16 @@ if (isset($_POST['id'], $_POST['name'])) {
 
 
 $create_error = "";
-if (isset($_POST['create'])) {
+if (isset($_POST['create']))
+{
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     $role = $_POST['role'];
 
     $create_error = register_user($connect, $name, $email, $password);
-    if (!$create_error) {
+    if (!$create_error)
+    {
         $user_id = mysqli_fetch_assoc(mysqli_query($connect, "SELECT id FROM users ORDER BY id DESC LIMIT 1"))['id'];
         mysqli_query($connect, "UPDATE users SET role='$role' WHERE id=$user_id");
         header("Location: index.php");
@@ -71,12 +76,15 @@ $users = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM users WHERE dele
     <div class="main-content">
         <h1>მომხმარებლები</h1>
 
-        <!-- CREATE FORM -->
         <div class="form-section">
             <h2>მომხმარებლის დამატება</h2>
-            <?php if($create_error != ""): ?>
+            <?php if($create_error != "")
+                {
+             ?>
                 <p class="error"><?= $create_error ?></p>
-            <?php endif; ?>
+            <?php
+                }
+            ?>
             <form method="POST">
                 <div class="form-group">
                     <label>სახელი</label>
@@ -113,7 +121,7 @@ $users = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM users WHERE dele
                 <input type="hidden" name="id" value="<?= $edit_user['id'] ?>">
                 <div class="form-group">
                     <label>სახელი</label>
-                    <input type="text" name="name" value="<?= $edit_user['name'] ?>" required>
+                    <input type="text" name="name" value="<?= $edit_user['name'] ?>">
                 </div>
                 <div class="form-group">
                     <label>ასაკი</label>
@@ -167,7 +175,9 @@ $users = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM users WHERE dele
                     <td><?= $u['role'] ?></td>
                     <td>
                         <a href="?edit=<?= $u['id'] ?>" class="btn-edit">EDIT</a>
-                        <?php if($u['id'] != $_SESSION['user_id']) { ?>
+                        <?php if($u['id'] != $_SESSION['user_id'])
+                            { 
+                        ?>
                         <a href="?delete=<?= $u['id'] ?>" class="btn-delete" onclick="return confirm('darwmunebuli xar?')">DELETE</a>
                         <?php
                          }

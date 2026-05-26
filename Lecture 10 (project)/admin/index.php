@@ -3,13 +3,15 @@ session_start();
 require_once '../php_folder/config.php';
 require_once '../php_folder/functions.php';
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']))
+{
     header("Location: ../login.php");
     exit();
 }
 
 $user = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM users WHERE id = '{$_SESSION['user_id']}'"));
-if ($user['role'] != 'admin') {
+if ($user['role'] != 'admin')
+{
     header("Location: ../programs.php");
     exit();
 }
@@ -20,7 +22,8 @@ $workouts_count = mysqli_fetch_assoc(mysqli_query($connect, "SELECT COUNT(*) as 
 
 $programs = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM programs WHERE deleted_at IS NULL"), MYSQLI_ASSOC);
 $programs_stats = [];
-foreach($programs as $program) {
+foreach($programs as $program)
+{
     $programs_stats[$program['id']] = get_program_stats($connect, $program['id']);
 }
 ?>
@@ -61,7 +64,6 @@ foreach($programs as $program) {
             </div>
         </div>
 
-        <!-- პროგრამების სტატისტიკა -->
         <h2 style="color:#fff; margin: 30px 0 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 18px;">პროგრამების სტატისტიკა</h2>
         <table class="admin-table">
             <thead>
@@ -74,7 +76,9 @@ foreach($programs as $program) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($programs as $program): ?>
+                <?php foreach($programs as $program)
+                    {
+                ?>
                 <tr>
                     <td><?= $program['title'] ?></td>
                     <td><?= $programs_stats[$program['id']]['total_users'] ?></td>
@@ -82,7 +86,9 @@ foreach($programs as $program) {
                     <td><?= $programs_stats[$program['id']]['max_weight'] ?> კგ</td>
                     <td><?= round($programs_stats[$program['id']]['avg_weight'], 1) ?> კგ</td>
                 </tr>
-                <?php endforeach; ?>
+                <?php 
+                    }
+                ?>
             </tbody>
         </table>
     </div>

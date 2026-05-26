@@ -9,7 +9,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 }
 
 // DELETE
-if (isset($_GET['delete'])) {
+if (isset($_GET['delete']))
+{
     $id = (int)$_GET['delete'];
     mysqli_query($connect, "UPDATE programs SET deleted_at=NOW() WHERE id=$id");
     header("Location: index.php");
@@ -17,7 +18,8 @@ if (isset($_GET['delete'])) {
 }
 
 // UPDATE
-if (isset($_POST['id'], $_POST['title'])) {
+if (isset($_POST['id'], $_POST['title']))
+{
     $id = (int)$_POST['id'];
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
@@ -31,7 +33,8 @@ if (isset($_POST['id'], $_POST['title'])) {
 }
 
 // CREATE
-if (isset($_POST['create'])) {
+if (isset($_POST['create']))
+{
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
     $duration_weeks = (int)$_POST['duration_weeks'];
@@ -104,12 +107,12 @@ $programs = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM programs WHER
             </form>
         </div>
 
-        <!-- EDIT FORM -->
-        <?php if (isset($_GET['edit']))
-            { 
-            $edit_id = (int)$_GET['edit'];
-            $program = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM programs WHERE id=$edit_id"));
-        ?>
+        
+<?php if (isset($_GET['edit']))
+{ 
+    $edit_id = (int)$_GET['edit'];
+    $program = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM programs WHERE id=$edit_id"));
+?>
         <div class="form-section">
             <h2>რედაქტირება</h2>
             <form method="POST">
@@ -146,41 +149,41 @@ $programs = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM programs WHER
                 <button type="submit" class="btn-submit">შენახვა</button>
             </form>
         </div>
-        <?php 
-            }
-        ?>
+<?php 
+}
+?>
 
-        <table class="admin-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>სახელი</th>
-                    <th>დონე</th>
-                    <th>მიზანი</th>
-                    <th>კვირა</th>
-                    <th>მოქმედება</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($programs as $program)
-                    {
-                 ?>
-                <tr>
-                    <td><?= $program['id'] ?></td>
-                    <td><?= $program['title'] ?></td>
-                    <td><?= $program['level'] ?></td>
-                    <td><?= $program['goal'] ?></td>
-                    <td><?= $program['duration_weeks'] ?></td>
-                    <td>
-                        <a href="?edit=<?= $program['id'] ?>" class="btn-edit">რედაქტირება</a>
-                        <a href="?delete=<?= $program['id'] ?>" class="btn-delete" onclick="return confirm('დარწმუნებული ხარ?')">წაშლა</a>
-                    </td>
-                </tr>
-                <?php
-                    }
-                ?>
-            </tbody>
-        </table>
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>სახელი</th>
+            <th>დონე</th>
+            <th>მიზანი</th>
+            <th>კვირა</th>
+            <th>მოქმედება</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach($programs as $program)
+{
+?>
+        <tr>
+            <td><?= $program['id'] ?></td>
+            <td><?= $program['title'] ?></td>
+            <td><?= $program['level'] ?></td>
+            <td><?= $program['goal'] ?></td>
+            <td><?= $program['duration_weeks'] ?></td>
+            <td>
+                <a href="?edit=<?= $program['id'] ?>" class="btn-edit">რედაქტირება</a>
+                <a href="?delete=<?= $program['id'] ?>" class="btn-delete" onclick="return confirm('დარწმუნებული ხარ?')">წაშლა</a>
+            </td>
+        </tr>
+<?php
+}
+?>
+    </tbody>
+</table>
     </div>
 </div>
 </body>

@@ -1,9 +1,11 @@
 <?php
-function register_user($connect, $name, $email, $password) {
+function register_user($connect, $name, $email, $password)
+{
     $hashed = password_hash($password, PASSWORD_DEFAULT);
     
     $check = mysqli_query($connect, "SELECT 1 FROM user_credentials WHERE email = '$email' LIMIT 1");
-    if (mysqli_fetch_assoc($check)) {
+    if (mysqli_fetch_assoc($check))
+    {
         return "emaili dakavebulia";
     }
     
@@ -14,7 +16,8 @@ function register_user($connect, $name, $email, $password) {
     return null;
 }
 
-function login_user($connect, $email, $password) {
+function login_user($connect, $email, $password)
+{
     $result = mysqli_query($connect, "
         SELECT u.id, u.name, u.role, uc.password 
         FROM user_credentials uc 
@@ -42,11 +45,13 @@ function get_user($connect, $id) {
     return mysqli_fetch_assoc($result);
 }
 
-function is_admin($connect, $id) {
+function is_admin($connect, $id)
+{
     $user = get_user($connect, $id);
     return $user['role'] === 'admin';
 }
-function get_user_progress($connect, $user_id) {
+function get_user_progress($connect, $user_id)
+{
     $result = mysqli_query($connect, "
         SELECT 
             e.name as exercise_name,
@@ -62,7 +67,8 @@ function get_user_progress($connect, $user_id) {
     ");
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
-function get_program_stats($connect, $program_id) {
+function get_program_stats($connect, $program_id)
+{
     $result = mysqli_query($connect, "
         SELECT 
             COUNT(DISTINCT ws.user_id) as total_users,

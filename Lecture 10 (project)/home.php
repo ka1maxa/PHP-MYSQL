@@ -14,9 +14,9 @@
 
     <nav>
         <ul>
-            <li><a href="#">PROGRAMS</a></li>
-            <li><a href="#">ABOUT US</a></li>
-            <li><a href="#">CONTACTS</a></li>
+            <li><a href="./programs.php">PROGRAMS</a></li>
+            <li><a href="./about_test.php">ABOUT US</a></li>
+            <li><a href="./contact_test.php">CONTACTS</a></li>
         </ul>
     </nav>
 

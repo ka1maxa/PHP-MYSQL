@@ -29,13 +29,13 @@ $programs = mysqli_fetch_all($programs_result, MYSQLI_ASSOC);
 <body>
     <header>
         <div class="logo">
-            <img src="./images/Gemini_Generated_Image_2tc08t2tc08t2tc0.png" alt="logo">
+            <img src="./images/logo.png" alt="logo">
         </div>
         <nav>
             <ul>
-                <li><a href="#">PROGRAMS</a></li>
-                <li><a href="#">ABOUT US</a></li>
-                <li><a href="#">CONTACTS</a></li>
+                <li><a href="./programs.php">PROGRAMS</a></li>
+                <li><a href="./about.php">ABOUT US</a></li>
+                <li><a href="./contact.php">CONTACTS</a></li>
             </ul>
         </nav>
         <div class="actions">

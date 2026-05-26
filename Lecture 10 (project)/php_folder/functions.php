@@ -25,7 +25,7 @@ function login_user($connect, $email, $password) {
     $user = mysqli_fetch_assoc($result);
     
     if (!$user) {
-        return "ar arsebobs";
+        return "მომხმარებელი ვერ მოიძებნა";
     }
     
     if (password_verify($password, $user['password'])) {
@@ -35,9 +35,8 @@ function login_user($connect, $email, $password) {
         return null;
     }
     
-    return "error email or passowrd";
+    return "ემაილი ან პაროლი არასწორია";
 }
-
 function get_user($connect, $id) {
     $result = mysqli_query($connect, "SELECT * FROM users WHERE id = '$id' LIMIT 1");
     return mysqli_fetch_assoc($result);

@@ -4,7 +4,11 @@ require_once './php_folder/config.php';
 require_once './php_folder/functions.php';
 
 if (isset($_SESSION['user_id'])) {
-    header("Location: ./programs.php");
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: ./admin/index.php");
+    } else {
+        header("Location: ./programs.php");
+    }
     exit();
 }
 
@@ -16,7 +20,12 @@ if (isset($_POST['login'])) {
     
     $error = login_user($connect, $email, $password);
     if (!$error) {
-        header("Location: ./programs.php");
+        if ($_SESSION['role'] == 'admin')    
+        {
+            header("Location: ./admin/index.php");
+        } else {
+            header("Location: ./programs.php");
+        }
         exit();
     }
 }

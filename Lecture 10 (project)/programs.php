@@ -11,6 +11,13 @@ $programs_query = "SELECT * FROM programs WHERE deleted_at IS NULL";
 $programs_result = mysqli_query($connect, $programs_query);
 $programs = mysqli_fetch_all($programs_result, MYSQLI_ASSOC);
 ?>
+<?php if($_SESSION['role'] == 'admin')
+    {
+         ?>
+    <a href="./admin/index.php" class="auth-button">ადმინ პანელი</a>
+<?php 
+    } 
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

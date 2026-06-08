@@ -11,18 +11,52 @@ if (isset($_SESSION['user_id']))
 
 $error = "";
 
-if (isset($_POST['register']))
+if(isset($_POST['register']))
 {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $error = register_user($connect, $name, $email, $password);
-    if (!$error)
+    if(empty($name))
     {
-        login_user($connect, $email, $password);
-        header("Location: ./programs.php");
-        exit();
+        $error = "სახელი სავალდებულოა";
+    }
+    else if(strlen($name) < 2)
+    {
+        $error = "სახელი მინიმუმ 2 სიმბოლო უნდა იყოს";
+    }
+    else if(empty($email))
+    {
+        $error = "ემაილი სავალდებულოა";
+    }
+    else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+        $error = "ემაილი არასწორი ფორმატია";
+    }
+    else if(empty($password))
+    {
+        $error = "პაროლი სავალდებულოა";
+    }
+    else if(strlen($password) < 8)
+    {
+        $error = "პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს";
+    }
+    else if(!preg_match('/[A-Z]/', $password))
+    {
+        $error = "პაროლი მინიმუმ 1 დიდ ასოს უნდა შეიცავდეს";
+    }
+    else if(!preg_match('/[0-9]/', $password))
+    {
+        $error = "პაროლი მინიმუმ 1 ციფრს უნდა შეიცავდეს";
+    }
+    else {
+        $error = register_user($connect, $name, $email, $password);
+        if (!$error)
+        {
+            login_user($connect, $email, $password);
+            header("Location: ./programs.php");
+            exit();
+        }
     }
 }
 ?>

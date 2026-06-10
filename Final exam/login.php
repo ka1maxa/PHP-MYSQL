@@ -4,48 +4,48 @@ include 'db.php';
 
 if(isset($_POST['submit']))
     {
-        $user = trim($_POST["user"]);
-        $password = trim($_POST["password"]);
+    $user = trim($_POST["user"]);
+    $password = trim($_POST["password"]);
 
-        if(empty($user))
-            {
-                echo "sheiyvane user !!";
-            };
-        if(empty($password))
-                {
-                    echo "sheiyvane paroli !!";
-                }
-                if($password == "1234" && $user == "admin")
-                {
-                    $_SESSION['user'] = $user;
-                    
-                    header("Location: dashboard.php");
-                    exit();
-                }else
-                    {
-                        $query = "SELECT * FROM users where username = '$user' AND password = '$password'";
-                        $res = mysqli_query($connect,$query);
-
-                        if(mysqli_num_rows($res) > 0)
-                            {
-                                $_SESSION['user'] = $user;
-                                header("Location: forUsers.php");
-                                exit();
-                            }
-                            else
-                                {
-                                    echo "araswori monacemebia";
-                                }
-                    }   
+    if(empty($user))
+    {
+        echo "შეიყვანე user!";
     }
+    else if(empty($password))
+    {
+        echo "შეიყვანე პაროლი!";
+    } 
+    else
+    {
+        $query = "SELECT * FROM users WHERE username='$user' AND deleted_at IS NULL";
+        $res = mysqli_query($connect, $query);
+        $row = mysqli_fetch_assoc($res);
+
+        if($row && password_verify($password, $row['password']))
+         {
+            $_SESSION['user'] = $row['username'];
+            $_SESSION['role'] = $row['role'];
+
+            if($row['role'] == 'admin') {
+                header("Location: dashboard.php");
+            } else {
+                header("Location: forUsers.php");
+            }
+            exit();
+        } else {
+            echo "არასწორი მონაცემები!";
+        }
+    }
+}
 ?>
+
 <body>
     <form method="POST">
-        <label>User : </label>
-        <input type="text" name="user" required><br><br>
-        
-        <label>Password : </label>
-        <input type="password" name="password" required><br><br>
+        <label>User: </label>
+        <input type="text" name="user"><br><br>
+
+        <label>Password: </label>
+        <input type="password" name="password"><br><br>
 
         <input type="submit" name="submit" value="SUBMIT">
     </form>

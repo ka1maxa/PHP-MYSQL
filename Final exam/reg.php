@@ -25,8 +25,9 @@ if(isset($_POST['submit']))
             }
         else
             {
+                $hashed_pass = password_hash($userPassword, PASSWORD_DEFAULT);
                 $query = "INSERT INTO users( username ,  password)
-                                     VALUES('$userName','$userPassword')";
+                                     VALUES('$userName','$hashed_pass')";
                 mysqli_query($connect, $query);
                 header('Location: login.php');
                 exit();                     

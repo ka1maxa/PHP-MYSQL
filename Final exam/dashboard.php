@@ -9,7 +9,8 @@ if(!isset($_SESSION['user']))
     }
 else
     {
-        echo "hi " . $_SESSION['user'];
+        echo "hi " . $_SESSION['username'];
+        echo "hi " . $_SESSION['role'];
     }
 ?>
 <body>
@@ -103,4 +104,46 @@ $row_by_id = mysqli_fetch_all($res_query);
             }
         ?>
     </table>
+    <br><br><br><br><br><br><br><hr>
 </body>
+
+
+<!-- insert -->
+<?php
+if(isset($_POST['subNewusers']))
+    {
+        $newUserName = trim($_POST['newUser']);
+        $newUserPass = trim($_POST['newUserPassword']);
+        $newUserRole = trim($_POST['newUserRole']);
+        
+        //files
+        $filename = $_FILES['userFile']['name'];
+        $fileLoc  = $_FILES['userFile']['tmp_name'];
+        $dir = "files/" . $filename;
+        move_uploaded_file($fileLoc, $dir);
+
+        $query = "INSERT INTO users (username, password,role,file)
+                              VALUES('$newUserName','$newUserPass','$newUserRole','$filename')";
+
+        mysqli_query($connect,$query);
+
+        header("Location: dashboard.php");
+        exit();
+
+    }
+?>
+<form method='POST' enctype="multipart/form-data" >
+    <label>sheiyvane axali useris saxeli : </label>
+    <input type="text" name='newUser' required><br><br>
+
+    <label>sheiyvane axali paroli : </label>
+    <input type="password" name='newUserPassword' required><br><br>
+
+    <label>sheiyvane role : </label>
+    <input type="text" name='newUserRole' required><br><br><br>
+
+    <label>sheiyvane file satestod : </label>
+    <input type="file" name='userFile' accept='.png'><br><br><br>
+
+    <input type="submit" value="SUBMIT" name='subNewusers'>
+</form>

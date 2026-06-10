@@ -9,7 +9,7 @@ if(!isset($_SESSION['user']))
     }
 else
     {
-        echo "hi " . $_SESSION['username'];
+        echo "hi " . $_SESSION['user'];
         echo "hi " . $_SESSION['role'];
     }
 ?>
